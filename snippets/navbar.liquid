@@ -1,0 +1,56 @@
+<!-- header section -->
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/">
+      <img src="{{section.settings.logo | img_url:'master' }}" alt="" width="{{section.settings.logo_max_width}}px" >
+    </a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto xgen-nav">
+
+          {% for link in linklists[section.settings.menu].links %}
+                {% if link.links != blank %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link" href="{{ link.url }}" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ link.title }}
+
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      {% for childlink in link.links %}
+                          <a href="{{ childlink.url }}" class="dropdown-item">
+                            {{ childlink.title }}
+                          </a>
+                      {% endfor %}
+                    </div>
+                  </li>
+                  {% else %}
+                  <li  class="nav-item">
+                    <a href="{{ link.url }}" class="nav-link">
+                      {{ link.title }}
+                    </a> 
+                  </li>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+        <ul class="navbar-nav ml-0 xgen-nav-icon">
+           <li class="nav-item">
+              <a class="nav-link" href="#"><i data-feather="heart"></i></a>
+           </li>
+           <li class="nav-item">
+              <a class="nav-link" href="#"><i data-feather="user"></i></a>
+           </li>
+           <li class="nav-item dropdown mini-cart">
+              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="shopping-cart"></i></a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-item-text">
+                    {% include 'mini-cart' %}
+                </div>
+            </div>
+           </li>
+        </ul>
+     </div>
+  </nav>
+</div>

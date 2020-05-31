@@ -1,0 +1,128 @@
+      <!-- footer section start -->
+      <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="contac-info footer-title">
+                        <h4>{{ section.settings.footer_w_1st_title }}</h4>
+                        {{ section.settings.footer_w_1st_content }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="follow-us footer-title">
+                      <h4>{{ section.settings.footer_follow_us_title }}</h4>
+                      {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+                      <ul>
+                        {% for social in social_accounts %}
+                          {%- assign social_handle = social | handleize -%}
+                          {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                          {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+
+                          {% if settings[social_link] != blank %}
+                            <li>
+                              <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                                {% include social_icon %}
+                                <!-- <span class="icon-fallback-text">{{ social }}</span> -->
+                              </a>
+                            </li>
+                          {% endif %}
+
+                        {% endfor %}
+                      </ul>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="payment-method footer-title">
+                      <h4>{{ section.settings.footer_payment_t }}</h4>
+                      {% capture payment_image_var %}
+                      {% if section.settings.footer_payment_img != blank %}{{ section.settings.footer_payment_img | img_url:'300x' }}
+                      {% else %}{{ 'no-image.webp' | asset_url }}
+                      {% endif %}
+                      {% endcapture %}
+                      <img src="{{payment_image_var}}" alt="payment">
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid remove-padding">
+            <div class="footer-bottom">{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}<!-- . {{ powered_by_link }} --></div>
+        </div>
+    </footer>
+
+<footer>
+  <div class="container">
+
+     <!--  {% if section.settings.show_payment_icons %}
+        {% unless shop.enabled_payment_types == empty %}
+          <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+          <ul class="payment-icons">
+            {% for type in shop.enabled_payment_types %}
+              <li>
+                {{ type | payment_type_svg_tag: class: 'icon' }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endunless %}
+      {% endif %} -->
+
+      <!-- {%- assign footer_linklist = section.settings.footer_linklist -%}
+      {% if linklists[footer_linklist].links.size > 0 %}
+        <ul class="nav justify-content-center">
+          {% for link in linklists[footer_linklist].links %}
+            <li  class="nav-item"><a href="{{ link.url }}" class="nav-link active" >{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %} -->
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "First menu",
+        "default": "footer"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "footer_w_1st_title",
+        "label": "Footer 1st Title",
+        "default": "Contact us"
+      },
+      {
+        "type": "html",
+        "id": "footer_w_1st_content",
+        "label": "Footer 1st content",
+        "default": "<p>3rd Avanue, 83 Manhattam <br> (+123) 456 789</p>"
+      },
+      {
+        "type": "text",
+        "id": "footer_follow_us_title",
+        "label": "Follow Us Title",
+        "default": "Follow us"
+      },
+      {
+        "type": "text",
+        "id": "footer_payment_t",
+        "label": "Payment Title",
+        "default": "Payment"
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_payment_img",
+        "label": "Payment Image"
+      }
+
+    ]
+  }
+
+{% endschema %}

@@ -1,0 +1,47 @@
+<!-- brand section start -->
+<section id="brands-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title">{{ section.settings.xgen_collection_heading_title }}</h1>
+             </div>
+             {% for collection in collections %}
+                    <div class="col-md-6 rem-padding-col-right">
+                        <div class="brand-box">
+                            <a href="{{ collection.url | default: "#" }}">
+                                {% if collection.image != blank %}
+                                    <img src="{{ collection | img_url: 'master' }}" alt="{{ collection.image.alt  }}">
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+  </section>
+
+  {% schema %}
+     {
+       "name": "Xgen Collection",
+       "settings": [
+          {
+            "type": "header",
+            "content": "Xgen Collection"
+          },
+          {
+            "id": "xgen_collection_heading_title",
+            "type": "text",
+            "label": "Shop By Brand",
+            "default": "#Shop By Brand"
+            
+          }
+       ],
+
+       "presets": [
+       {
+         "name": "Xgen Collection",
+         "category": "Xgen Theme options"
+       }
+     ]
+     }
+    {% endschema %}

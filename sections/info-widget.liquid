@@ -1,0 +1,118 @@
+      <!-- information widget section -->
+      <section id="information-widget">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-box">
+                        <div class="info-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div class="info-text">
+                            <strong>{{section.settings.widget_1st_title}}</strong>
+                            {{section.settings.widget_1st_content}}
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="info-box">
+                      <div class="info-icon">
+                          <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+                      </div>
+                      <div class="info-text">
+                        <strong>{{section.settings.widget_2nd_title}}</strong>
+                        {{section.settings.widget_2nd_content}}
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="info-box">
+                      <div class="info-icon">
+                          <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path></svg>
+                      </div>
+                      <div class="info-text">
+                        <strong>{{section.settings.widget_3rd_title}}</strong>
+                        {{section.settings.widget_3rd_content}}
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% schema %}
+ {
+   "name": "Information Widget",
+   "settings": [
+      {
+        "type": "header",
+        "content": "Information Slider"
+      },
+    {
+        "type": "image_picker",
+        "id": "info_image",
+        "label": "Info Image Background"
+    },
+    {
+        "id": "widget_1st_title",
+        "type": "text",
+        "label": "Winget 1st Title",
+        "default": "MAIL US"
+    },
+    {
+        "id": "widget_1st_content",
+        "type": "html",
+        "label": "Widget 1st Content",
+        "default": "<p>More details</p>"
+    },
+    {
+        "id": "widget_2nd_title",
+        "type": "text",
+        "label": "Winget 2nd Title",
+        "default": "CUSTOMER SERVE"
+    },
+    {
+        "id": "widget_2nd_content",
+        "type": "html",
+        "label": "Widget 2nd Content",
+        "default": "<p>Call us at </p>"
+    },
+    {
+        "id": "widget_3rd_title",
+        "type": "text",
+        "label": "Winget 3rd Title",
+        "default": "QUICK DELIVERY"
+    },
+    {
+        "id": "widget_3rd_content",
+        "type": "html",
+        "label": "Widget 3rd Content",
+        "default": "<p>Delivery in just 5 days</p>"
+    }
+
+   ],
+
+   "presets": [
+   {
+     "name": "Information Widget",
+     "category": "Xgen Theme options"
+   }
+ ]
+ }
+{% endschema %}
+
+{% capture info_image_var %}
+{% if section.settings.info_image != blank %}
+    {{ section.settings.info_image | img_url:'master' }}
+{% else %}
+    {{ 'no-image.webp' | asset_url }}
+{% endif %}
+{% endcapture %}
+
+<style>
+
+    #information-widget{
+        background-image: url({{ info_image_var }});
+    }
+
+</style>

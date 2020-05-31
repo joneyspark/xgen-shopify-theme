@@ -1,0 +1,96 @@
+<!-- Collection Section -->
+<div class="container">
+    <div class="row">
+       <div class="col-md-12">
+          <h1 class="section-title">{{section.settings.collection_sec_title}}</h1>
+       </div>
+       <div class="col-md-6 rem-padding-col-right">
+          <div class="category-img-left">
+             <img src="{% if section.settings.collection_1st_block_img != blank %}{{ section.settings.collection_1st_block_img | img_url:'master' }}{% else %}{{ 'no-image.png' | asset_url }}{% endif %}" alt="">
+             <div class="category-content">
+                 {{ section.settings.collection_1st_block }}
+                
+                <a href="{{section.settings.collection_1st_btn_url}}" class="show-now-btn">{{section.settings.collection_1st_btn_text}}</a>
+             </div>
+          </div>
+       </div>
+       <div class="col-md-6 rem-padding-col-left">
+          <div class="category-img-right">
+            <img src="{% if section.settings.collection_1st_block_img_2 != blank %}{{ section.settings.collection_1st_block_img_2 | img_url:'master' }}{% else %}{{ 'no-image.png' | asset_url }}{% endif %}" alt="">
+             <div class="category-content-right">
+               {{ section.settings.collection_1st_block_2 }}
+                <a href="{{ section.settings.collection_1st_btn_url_2 }}" class="shop-now-btn-shape">{{section.settings.collection_1st_btn_text_2 }} <span></span></a>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ {% schema %}
+ {
+   "name": "Collection Xgen 2 Blocks",
+   "settings": [
+      {
+        "type": "header",
+        "content": "Collection 2 Blocks"
+      },
+      {
+         "id": "collection_sec_title",
+         "type": "text",
+         "label": "Collection Section Heading",
+         "default": "#Our Collection"
+     },
+      {
+        "id": "collection_1st_block_img",
+        "type": "image_picker",
+        "label": "Block image 1st"
+        
+      },
+      {
+        "id": "collection_1st_block",
+        "type": "html",
+        "label": "Collection Content",
+        "default": "<div><h1>Womens Collection</h1><p>Last day</p><h3>free shipping on $25*</h3></div>"
+    },
+      {
+        "id": "collection_1st_btn_url",
+        "type": "url",
+        "label": "Shop Now"
+    },
+      {
+        "id": "collection_1st_btn_text",
+        "type": "text",
+        "label": "Shop Now"
+    },
+    {
+      "id": "collection_1st_block_img_2",
+      "type": "image_picker",
+      "label": "Block image 1st"
+      
+    },
+    {
+      "id": "collection_1st_block_2",
+      "type": "html",
+      "label": "Collection Content",
+      "default": "<div><h2>Mens Collection</h2></div>"
+  },
+    {
+      "id": "collection_1st_btn_url_2",
+      "type": "url",
+      "label": "Shop Now"
+  },
+    {
+      "id": "collection_1st_btn_text_2",
+      "type": "text",
+      "label": "Shop Now"
+  }
+
+   ],
+
+   "presets": [
+   {
+     "name": "Collection Xgen 2 Blocks",
+     "category": "Xgen Theme options"
+   }
+ ]
+ }
+{% endschema %}

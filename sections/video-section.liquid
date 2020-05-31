@@ -1,0 +1,91 @@
+      <!-- Video Section Start -->
+      <section id="video-section">
+        <div class="container">
+           <div class="video-box">
+              {{section.settings.xgen_video_content}}
+              <!-- Button trigger modal -->
+              <button type="button" data-toggle="modal" data-target="#videoPopup">
+                 <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                       class="feather feather-play-circle">
+                       <circle cx="12" cy="12" r="10"></circle>
+                       <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                 </p>
+                 {{section.settings.xgen_video_play_btn_txt}}
+              </button>
+           </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade videoPopup" id="videoPopup" tabindex="-1" role="dialog" aria-labelledby="videoPopupTitle"
+           aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                 <div class="modal-body">
+                    <div class="vidoe-wrap">
+                       <video controls autoplay>
+                        <source src="{{ section.settings.xgen_video_play_btn_link }}" type="video/mp4" >
+                       </video>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </section>
+
+     {% schema %}
+     {
+       "name": "Video Section",
+       "settings": [
+          {
+            "type": "header",
+            "content": "Video Section"
+          },
+          {
+            "id": "xgen_video_bg_img",
+            "type": "image_picker",
+            "label": "Background Image in Video Section"
+            
+          },
+          {
+            "id": "xgen_video_content",
+            "type": "html",
+            "label": "Collection Content",
+            "default": "<div><h1>Buy from a verified website with</h1><h3>100% secure payment</h3></div>"
+        },
+        {
+            "id": "xgen_video_play_btn_txt",
+            "type": "text",
+            "label": "Play Video",
+            "default": "Play Video"
+        },
+        {
+            "id": "xgen_video_play_btn_link",
+            "type": "url",
+            "label": "Video Url"
+        }
+       ],
+    
+       "presets": [
+       {
+         "name": "Video Section",
+         "category": "Xgen Theme options"
+       }
+     ]
+     }
+    {% endschema %}
+
+    {% capture video_section_bg %}
+        {% if section.settings.xgen_video_bg_img != blank %}
+            {{ section.settings.xgen_video_bg_img | img_url:'master' }}
+        {% else %}
+            {{ 'no-image.webp' | asset_url }}
+        {% endif %}
+    {% endcapture %}
+
+    <style>
+        #video-section{
+            background-image: url( {{ video_section_bg }} );
+        }
+    </style>
